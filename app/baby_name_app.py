@@ -64,13 +64,57 @@ def read_names_from_file(filename="babynames_boys.csv"):
         for row in reader:
             babynames_boys.append(dict(row))
     return babynames_boys
+
+def read_names_from_file_girl(filename="babynames_girls.csv"):
+    filepath = os.path.join(os.path.dirname(__file__), "data", filename)
+    babynames_girls = []
+    with open(filepath, "r") as csv_file:
+        reader = csv.DictReader(csv_file)
+        for row in reader:
+            babynames_girls.append(dict(row))
+    return babynames_girls
 #assert: len = 200
 
 babynames_boys = read_names_from_file()
 
-def difference_in_ranks():
-    difference = int(names["2018 rank"]) - int(names["2017 rank"])
-    print(difference)
+babynames_girls = read_names_from_file_girl()
 
-for names in babynames_boys:
-    difference_in_ranks()
+def name_rankings():
+    user_gender_preference = input("Please enter the gender of the baby names you'd like to see rankings for: ")
+    user_rankings_range = input("Great. Now enter the number of the last ranked name you'd like to see in your list: ")
+    last_index = int(user_rankings_range)
+    list_babynames_boys = babynames_boys[0:last_index]
+    list_babynames_girls = babynames_girls[0:last_index]
+    if user_gender_preference == "Male":
+        for name in list_babynames_boys:
+            print("------------------------------")
+            print("Name: " + name["name"] + " | 2018 Rank: " + name["2018 rank"] + " | 2017 Rank: " + name["2017 rank"])
+            difference_in_ranks(name)
+            per_capita(name)
+            print("------------------------------")
+    if user_gender_preference == "Female":
+        for name in list_babynames_girls:
+            print("------------------------------")
+            print("Name: " + name["name"] + " | 2018 Rank: " + name["2018 rank"] + " | 2017 Rank: " + name["2017 rank"])
+            difference_in_ranks(name)
+            per_capita(name)
+            print("------------------------------")
+
+
+def difference_in_ranks(name):
+    difference = int(name["2018 rank"]) - int(name["2017 rank"])
+    if difference > 0:
+        print("The ranking for this name increased by " + str(abs(difference)) + " spots.") #source for absolute value: https://docs.python.org/2/library/functions.html
+    elif difference < 0:
+        print("The ranking for this name decreased by " + str(abs(difference)) + " spots.")
+    else:
+        print("The ranking for this name stayed the same over the last 2 years.")
+
+def per_capita(name):
+    popularity_formatted = "{0:,}".format(int(name["popularity"]))
+    percent_per_capita = int(name["popularity"]) / 1000000
+    percent_per_capita_formatted = "{:.2%}".format(percent_per_capita) #source for percent formatting: https://www.w3resource.com/python-exercises/string/python-data-type-string-exercise-36.php
+    print("The population for this name is " + popularity_formatted + ", or " + percent_per_capita_formatted + ", per million babies.")
+
+
+name_rankings()
