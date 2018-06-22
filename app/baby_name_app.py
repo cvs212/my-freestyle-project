@@ -10,18 +10,17 @@ baby_name = "stephen"
 
 #meaning
 
-baby_url = f"http://www.momjunction.com/baby-names/{baby_name}/"
 
-response = requests.get(baby_url)
-response_html = response.text
-
-soup = BeautifulSoup(response_html, 'html.parser')
-
-span_class = (soup.find_all("div", "single_baby_name_description"))
-
-print(span_class[0].text)
+def name_meaning():
+    user_name_meaning = input("You selected the name meaning function. Please enter the name that you'd like to find the meaning of: ")
+    baby_url = f"http://www.momjunction.com/baby-names/{user_name_meaning}/"
+    response = requests.get(baby_url)
+    response_html = response.text
+    soup = BeautifulSoup(response_html, 'html.parser')
+    span_class = (soup.find_all("div", "single_baby_name_description"))
+    print(span_class[0].text)
 #error_message = NO DATA FOUND PLEASE TRY WITH ANY OTHER NAME
-
+#test validation
 #details
 
 behind_the_name_url = f"https://www.behindthename.com/api/lookup.json?name={baby_name}&key={api_key}"
@@ -85,21 +84,23 @@ def name_rankings():
     last_index = int(user_rankings_range)
     list_babynames_boys = babynames_boys[0:last_index]
     list_babynames_girls = babynames_girls[0:last_index]
-    if user_gender_preference == "Male":
+    if user_gender_preference == "Male" or user_gender_preference == "male":
         for name in list_babynames_boys:
             print("------------------------------")
             print("Name: " + name["name"] + " | 2018 Rank: " + name["2018 rank"] + " | 2017 Rank: " + name["2017 rank"])
             difference_in_ranks(name)
             per_capita(name)
             print("------------------------------")
-    if user_gender_preference == "Female":
+    elif user_gender_preference == "Female" or user_gender_preference == "female":
         for name in list_babynames_girls:
             print("------------------------------")
             print("Name: " + name["name"] + " | 2018 Rank: " + name["2018 rank"] + " | 2017 Rank: " + name["2017 rank"])
             difference_in_ranks(name)
             per_capita(name)
             print("------------------------------")
-
+    else:
+        print("Your selection isn't an option in this app. Please try again.")
+        name_rankings()
 
 def difference_in_ranks(name):
     difference = int(name["2018 rank"]) - int(name["2017 rank"])
@@ -118,3 +119,4 @@ def per_capita(name):
 
 
 name_rankings()
+name_meaning()
