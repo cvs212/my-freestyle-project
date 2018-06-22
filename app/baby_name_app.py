@@ -4,6 +4,7 @@ import json
 import csv
 import os
 import itertools
+import random
 
 api_key = "ch121382676"
 
@@ -44,7 +45,7 @@ def name_letter():
             per_capita(names)
             print("------------------------------")
             filepath_2 = os.path.join(os.path.dirname(__file__), "data", filename)
-            with open(filepath_2, "w") as csv_file:
+            with open(filepath_2, "w") as csv_file: #source: notes from the inventory management project
                 writer = csv.DictWriter(csv_file, fieldnames=["2018 rank", "name", "2017 rank", "popularity", "gender", "syllables"])
                 writer.writeheader()
                 for names in matching_names:
@@ -68,9 +69,27 @@ def name_letter():
         print("You seemed to have made an error with the last input. Feel free to try again")
         name_letter()
 
-
-
-#related names
+def name_random():
+    user_input_random = input("You selected the Random Name Generator. Please enter the gender of the name you'd like: ")
+    if user_input_random == "Male" or user_input_random == "male":
+        random_name_male = random.choice(babynames_boys)
+        print("------------------------------------------------------------")
+        print("The name that the app generated for you is: " + random_name_male["name"])
+        print("------------------------------------------------------------")
+    elif user_input_random == "Female" or user_input_random == "female":
+        random_name_female = random.choice(babynames_girls)
+        print("------------------------------------------------------------")
+        print("The name that the app generated for you is: " + random_name_female["name"])
+        print("------------------------------------------------------------")
+    elif user_input_random == "Either" or user_input_random == "either":
+        all_names = []
+        all_names.append(babynames_boys)
+        all_names.append(babynames_girls)
+        random_all_names = random.choice(all_names)
+        random_all_names_2 = random_all_names[0] 
+        print("------------------------------------------------------------")
+        print("The name that the app generated for you is: " + random_all_names_2["name"])
+        print("------------------------------------------------------------")
 
 def name_information():
     user_input_related_names = input("You selected the Name Information function. Please enter the name that you'd like to see related names and the origin for: ")
@@ -108,11 +127,6 @@ def read_names_from_file_girl(filename="babynames_girls.csv"):
     return babynames_girls
 #assert: len = 200
 
-def write_products_to_file(filename):
-    filepath_2 = os.path.join(os.path.dirname(__file__), "data", filename)
-    with open(filepath_2, "w") as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=["2018 rank", "name", "2017 rank", "popularity", "gender", "syllables"])
-        writer.writeheader()
 
 
 babynames_boys = read_names_from_file()
@@ -164,4 +178,5 @@ def per_capita(name):
 #name_rankings()
 #name_meaning()
 #name_information()
-name_letter()
+#name_letter()
+name_random()
