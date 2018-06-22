@@ -18,42 +18,32 @@ def name_meaning():
     response_html = response.text
     soup = BeautifulSoup(response_html, 'html.parser')
     span_class = (soup.find_all("div", "single_baby_name_description"))
+    print("-----------------------------------------------------------------")
     print(span_class[0].text)
+    print("-----------------------------------------------------------------")
 #error_message = NO DATA FOUND PLEASE TRY WITH ANY OTHER NAME
 #test validation
 #details
 
-behind_the_name_url = f"https://www.behindthename.com/api/lookup.json?name={baby_name}&key={api_key}"
+#behind_the_name_url = f"https://www.behindthename.com/api/lookup.json?name={baby_name}&key={api_key}"
 
-response_2 = requests.get(behind_the_name_url)
-response_json = json.loads(response_2.text)
-print("This is the language origin: " + (response_json[0]['usages'][0]['usage_full']))
+
 
 #related names
 
-behind_the_name_related_names_url = f"https://www.behindthename.com/api/related.json?name={baby_name}&usage=eng&key={api_key}"
-
-response_3 = requests.get(behind_the_name_related_names_url)
-response_json_2 = json.loads(response_3.text)
-related_names = response_json_2['names']
-print(f"These are the related names for {baby_name.title()}: ")
-for names in related_names:
-    print(names)
-
-#famous people with similar related_names
-
-#baby_name_famous_people = "https://www.thebump.com/b/chris-baby-name"
-
-#response_4 = requests.get(baby_name_famous_people)
-#response_4_html = response_4.text
-
-#soup_2 = BeautifulSoup(response_4_html, 'html.parser')
-
-#li_class = (soup_2.find_all("li", "famous-name specific-name mobile-row-item-2 desktop-row-item-3"))
-
-#print(li_class[0].text)
-
-#reading list of dictionaries
+def name_information():
+    user_input_related_names = input("You selected the Name Information function. Please enter the name that you'd like to see related names and the origin for: ")
+    behind_the_name_related_names_url = f"https://www.behindthename.com/api/related.json?name={user_input_related_names}&usage=eng&key={api_key}"
+    response_3 = requests.get(behind_the_name_related_names_url)
+    response_json_2 = json.loads(response_3.text)
+    related_names = response_json_2['names']
+    print(f"These are the related names for {user_input_related_names.title()}: ")
+    for names in related_names:
+        print(str(related_names.index(names) + 1) + ". " + names)
+    behind_the_name_origin_url = f"https://www.behindthename.com/api/lookup.json?name={user_input_related_names}&key={api_key}"
+    response_2 = requests.get(behind_the_name_origin_url)
+    response_json = json.loads(response_2.text)
+    print(f"This is the language origin for {user_input_related_names.title()}: " + (response_json[0]['usages'][0]['usage_full']))
 
 def read_names_from_file(filename="babynames_boys.csv"):
     filepath = os.path.join(os.path.dirname(__file__), "data", filename)
@@ -120,5 +110,6 @@ def per_capita(name):
     print("The population for this name is " + popularity_formatted + ", or " + percent_per_capita_formatted + ", per million babies.")
 
 
-name_rankings()
-name_meaning()
+#name_rankings()
+#name_meaning()
+name_information()
