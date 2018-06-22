@@ -8,6 +8,35 @@ import random
 
 api_key = "ch121382676"
 
+menu = """
+    ---------------------------------------------------------
+                BABY & REGULAR NAME RESOURCE APP
+    ---------------------------------------------------------
+    Hello and welcome to the Baby & Regular name Resrouce app!
+    You have the option to choose from a variety of functions
+    that'll help you narrow down a baby name or simply look up
+    more information about a particular name. Please look at
+    the below menu and select the function that you want to
+    explore.
+
+    User Input     : Description
+    ----------------------------
+    'Rank'         | This will give you the rankings of the
+                     most popular baby names in 2018. You
+                     can choose the rankings based on gender.
+    'Meaning'      | You can see the meaning of a name of your
+                     choice.
+    'Information'  | This options will allow you to view the
+                     related names and origin of a name of
+                     your choice.
+    'Letter'       | You can view baby name rankings and other
+                     helpful information by letter.
+    'Random'       | Choose this option if you want the app
+                     to help you choose a name randomly.
+
+    Please enter your choice in the line below:
+    """
+
 
 def name_meaning():
     user_name_meaning = input("You selected the name meaning function. Please enter the name that you'd like to find the meaning of: ")
@@ -168,9 +197,21 @@ def per_capita(name):
     percent_per_capita_formatted = "{:.2%}".format(percent_per_capita) #source for percent formatting: https://www.w3resource.com/python-exercises/string/python-data-type-string-exercise-36.php
     print("The population for this name is " + popularity_formatted + ", or " + percent_per_capita_formatted + ", per million babies.")
 
+def run():
+    user_menu_choice = input(menu)
+    if user_menu_choice == 'Rank' or user_menu_choice == 'rank':
+        name_rankings()
+    elif user_menu_choice == 'Meaning' or user_menu_choice == 'meaning':
+        name_meaning()
+    elif user_menu_choice == 'Information' or user_menu_choice == 'information':
+        name_information()
+    elif user_menu_choice == 'Letter' or user_menu_choice == 'letter':
+        name_letter()
+    elif user_menu_choice == 'Random' or user_menu_choice == 'random':
+        name_random()
+    else:
+        print("Looks like the option you entered isn't valid. Please try again.")
+        run()
 
-#name_rankings()
-#name_meaning()
-#name_information()
-#name_letter()
-name_random()
+run()
+
