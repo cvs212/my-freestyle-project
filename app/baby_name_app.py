@@ -8,10 +8,6 @@ import random
 
 api_key = "ch121382676"
 
-baby_name = "stephen"
-
-#meaning
-
 
 def name_meaning():
     user_name_meaning = input("You selected the name meaning function. Please enter the name that you'd like to find the meaning of: ")
@@ -86,7 +82,7 @@ def name_random():
         all_names.append(babynames_boys)
         all_names.append(babynames_girls)
         random_all_names = random.choice(all_names)
-        random_all_names_2 = random_all_names[0] 
+        random_all_names_2 = random_all_names[0]
         print("------------------------------------------------------------")
         print("The name that the app generated for you is: " + random_all_names_2["name"])
         print("------------------------------------------------------------")
@@ -126,8 +122,6 @@ def read_names_from_file_girl(filename="babynames_girls.csv"):
             babynames_girls.append(dict(row))
     return babynames_girls
 #assert: len = 200
-
-
 
 babynames_boys = read_names_from_file()
 
