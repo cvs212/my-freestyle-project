@@ -80,11 +80,10 @@ babynames_girls = read_names_from_file_girl()
 
 def name_rankings():
     user_gender_preference = input("Please enter the gender of the baby names you'd like to see rankings for: ")
-    user_rankings_range = input("Great. Now enter the number of the last ranked name you'd like to see in your list: ")
-    last_index = int(user_rankings_range)
-    list_babynames_boys = babynames_boys[0:last_index]
-    list_babynames_girls = babynames_girls[0:last_index]
     if user_gender_preference == "Male" or user_gender_preference == "male":
+        user_rankings_range = input("Great. Now enter the number of the last ranked name you'd like to see in your list: ")
+        last_index = int(user_rankings_range)
+        list_babynames_boys = babynames_boys[0:last_index]
         for name in list_babynames_boys:
             print("------------------------------")
             print("Name: " + name["name"] + " | 2018 Rank: " + name["2018 rank"] + " | 2017 Rank: " + name["2017 rank"])
@@ -92,6 +91,9 @@ def name_rankings():
             per_capita(name)
             print("------------------------------")
     elif user_gender_preference == "Female" or user_gender_preference == "female":
+        user_rankings_range = input("Great. Now enter the number of the last ranked name you'd like to see in your list: ")
+        last_index = int(user_rankings_range)
+        list_babynames_girls = babynames_girls[0:last_index]
         for name in list_babynames_girls:
             print("------------------------------")
             print("Name: " + name["name"] + " | 2018 Rank: " + name["2018 rank"] + " | 2017 Rank: " + name["2017 rank"])
