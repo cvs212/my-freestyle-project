@@ -11,6 +11,7 @@ Requires Python 3.x. Additionally, for any functions that involve API connection
 This app makes use of the following packages:
 
 BeautifulSoup
+dotenv
 Requests
 Json
 CSV
@@ -27,7 +28,7 @@ Make sure to download the two .csv files in the ‘data’ directory. The ‘dat
 babynames_boys
 babynames_girls
 
-Additionally, an API key from ‘Behind The Name’ saved as a ‘BEHIND_THE_NAME_KEY’ variable in a .env file would be helpful.
+Additionally, an API key from ‘Behind The Name’ saved as a ‘BEHIND_THE_NAME_KEY’ environment variable is needed for the 'information' function of the app. You can do this either through a .env file or in your commmand prompt. It may be more helpful to set the environment variable through your command prompt since the .env method is more prone to errors. Also be mindful of quotation marks when setting up your environment variable since quoations aren't part of the 'Behind The Name' url.
 
 ## Usage
 
