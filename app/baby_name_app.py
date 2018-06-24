@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 import requests
 import json
 import csv
@@ -6,13 +7,12 @@ import os
 import itertools
 import random
 
-api_key = "ch121382676"
-
+#inspiration for menu design from the inventory management project
 menu = """
     ---------------------------------------------------------
                 BABY & REGULAR NAME RESOURCE APP
     ---------------------------------------------------------
-    Hello and welcome to the Baby & Regular name Resrouce app!
+    Hello and welcome to the Baby & Regular Name Resource app!
     You have the option to choose from a variety of functions
     that'll help you narrow down a baby name or simply look up
     more information about a particular name. Please look at
@@ -48,18 +48,13 @@ def name_meaning():
     print("-----------------------------------------------------------------")
     print(span_class[0].text)
     print("-----------------------------------------------------------------")
-#error_message = NO DATA FOUND PLEASE TRY WITH ANY OTHER NAME
-#test validation
-#details
-
-#behind_the_name_url = f"https://www.behindthename.com/api/lookup.json?name={baby_name}&key={api_key}"
 
 def name_letter():
-    user_name_letter = input("You selected the Names by Letter Function. Please enter the letter by which you want to look up name information: ")
+    user_name_letter = input("You selected the Names by Letter function. Please enter the letter by which you want to look up name information: ")
     if user_name_letter.isalpha() == False or len(user_name_letter) > 1: #source for checking whether an input is a letter: https://stackoverflow.com/questions/18667410/how-can-i-check-if-a-string-only-contains-letters-in-python
         print("The input that you entered isn't valid. Please try again.")
         quit("Stopping the program. Feel free to start over.")
-    user_name_letter_gender = input("Cool. Now enter the gender of names that you're interested in: ")
+    user_name_letter_gender = input("Cool. Now enter the gender of names that you're interested in ('Male' or 'Female'): ")
     if user_name_letter_gender == "Male" or user_name_letter_gender == "male":
         matching_names = [names for names in babynames_boys if names["name"][0] == user_name_letter]
         filename = "babynames_" + user_name_letter + "_" + user_name_letter_gender + ".csv"
@@ -95,7 +90,7 @@ def name_letter():
         name_letter()
 
 def name_random(): #source for helpful tips on random choice: https://stackoverflow.com/questions/306400/how-to-randomly-select-an-item-from-a-list
-    user_input_random = input("You selected the Random Name Generator. Please enter the gender of the name you'd like: ")
+    user_input_random = input("You selected the Random Name Generator. Please enter the gender of the name you'd like ('Male', 'Female', or 'Either'): ")
     if user_input_random == "Male" or user_input_random == "male":
         random_name_male = random.choice(babynames_boys)
         print("------------------------------------------------------------")
@@ -121,12 +116,15 @@ def name_random(): #source for helpful tips on random choice: https://stackoverf
         print("------------------------------------------------------------")
 
 def name_information():
-    user_input_related_names = input("You selected the Name Information function. Please enter the name that you'd like to see related names and the origin for: ")
+    user_input_related_names = input("You selected the Name Information function. Please enter the name that you'd like to see more information for: ")
+    load_dotenv()
+    api_key = os.environ.get("BEHIND_THE_NAME_KEY") or "Looks like you don't have an API Key from Behind The Name. Please set an environent variable called 'BEHIND_THE_NAME_KEY'." #source: your demo on local environment variables
     behind_the_name_related_names_url = f"https://www.behindthename.com/api/related.json?name={user_input_related_names}&usage=eng&key={api_key}"
     response_3 = requests.get(behind_the_name_related_names_url)
     response_json_2 = json.loads(response_3.text)
     if "error" in response_3.text: #source: your demo on validation errors in class
         print("The name you requested isn't in the system. Please try again.")
+        print(behind_the_name_related_names_url)
         quit("Stopping the program. Feel free to start over.")
     related_names = response_json_2['names']
     print(f"These are the related names for {user_input_related_names.title()}: ")
