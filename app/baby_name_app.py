@@ -19,14 +19,14 @@ menu = """
     the below menu and select the function that you want to
     explore.
 
-    User Input     : Description
+    User Input     | Description
     ----------------------------
     'Rank'         | This will give you the rankings of the
                      most popular baby names in 2018. You
                      can choose the rankings based on gender.
     'Meaning'      | You can see the meaning of a name of your
                      choice.
-    'Information'  | This options will allow you to view the
+    'Information'  | This option will allow you to view the
                      related names and origin of a name of
                      your choice.
     'Letter'       | You can view baby name rankings and other
@@ -94,7 +94,7 @@ def name_letter():
         print("You seemed to have made an error with the last input. Feel free to try again")
         name_letter()
 
-def name_random():
+def name_random(): #source for helpful tips on random choice: https://stackoverflow.com/questions/306400/how-to-randomly-select-an-item-from-a-list
     user_input_random = input("You selected the Random Name Generator. Please enter the gender of the name you'd like: ")
     if user_input_random == "Male" or user_input_random == "male":
         random_name_male = random.choice(babynames_boys)
@@ -114,6 +114,10 @@ def name_random():
         random_all_names_2 = random_all_names[0]
         print("------------------------------------------------------------")
         print("The name that the app generated for you is: " + random_all_names_2["name"])
+        print("------------------------------------------------------------")
+    else:
+        print("------------------------------------------------------------")
+        print("Your input isn't a valid request. Please try again.")
         print("------------------------------------------------------------")
 
 def name_information():
@@ -150,7 +154,6 @@ def read_names_from_file_girl(filename="babynames_girls.csv"):
         for row in reader:
             babynames_girls.append(dict(row))
     return babynames_girls
-#assert: len = 200
 
 babynames_boys = read_names_from_file()
 
@@ -213,5 +216,5 @@ def run():
         print("Looks like the option you entered isn't valid. Please try again.")
         run()
 
-run()
-
+if __name__ == "__main__":
+    run()
