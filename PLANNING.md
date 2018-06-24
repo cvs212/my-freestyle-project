@@ -26,7 +26,7 @@ Deciding which name to give a child is a cumbersome process whose effect is felt
 2.	Among the choices that the user can select from the menu are:
   a.	List popular baby boy or girl names from 2018 based on a user’s input and range of choice
   b.	List the rankings of a particular name from a previous year
-  c.	Show famous people that share the name of a user’s choice
+  c.	Show famous people that share the name of a user’s choice (Edit 6.23.18: This option is no longer available.)
   d.	Give the background and meaning behind a particular name
   e.	List the related names of the name from a user’s input
   f.	Give the user a choice to have the app randomly select a name for them
@@ -43,7 +43,7 @@ Deciding which name to give a child is a cumbersome process whose effect is felt
 1.	A list of popular baby boy or girl names from 2018 and the previous year.
 2.	The meaning and origin behind a name.
 3.	Related names.
-4.	Famous people who share a particular name.
+4.	Famous people who share a particular name. (Edit 6.23.18: This option is no longer available.)
 5.	A results.csv file that outlines the list results from the user’s inputs.
 
 ## Technology Requirements
