@@ -50,6 +50,7 @@ Deciding which name to give a child is a cumbersome process whose effect is felt
 
 1.	I will need to use the API feed from the ‘Behind The Name’ web site. This API feed will have the origin, related names, and gender.
 2.	In order to get the meanings behind each name, I will need to use the ‘BeautifulSoup’ package to web scrape information from particular sites. Two particular sites of interest are ‘Behind The Name’ and ‘Baby Center.’ A final decision on which site to use will be determined based on how easy it is to web scrape information from a particular site.
+3. (Edit 6.24.18: The baby name rankings will be based on the latest BabyCenter list.)
 
 ### Python Package Requirements
 
