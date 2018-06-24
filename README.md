@@ -32,7 +32,7 @@ Additionally, an API key from ‘Behind The Name’ saved as a ‘BEHIND_THE_NAM
 
 ## Usage
 
-To get a ranking of the most popular baby names by gender based on the latest information from BabyCenter, enter this command: Rank. Also, specify the gender of the names in which you’re interested.
+To get a ranking of the most popular baby names by gender based on the latest information from BabyCenter, enter this command: Rank. Also, specify the gender of the names in which you’re interested and the last number of the range of ranks (i.e. 14).
 
 To get the meaning behind a name, enter this command: Meaning. Also, specify the name of choice.
 
